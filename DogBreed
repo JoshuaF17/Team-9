@@ -1,0 +1,17 @@
+public class DogBreed {
+	// instance variables
+	int apt = 0;
+	int newOwn = 0;
+	int alone = 0;
+	int tempCold = 0;
+	int tempHot = 0;
+	int friendly = 0;
+	int shed = 0;
+	int groom = 0;
+	int health = 0;
+	int size = 0;
+	int train = 0;
+	int bark = 0;
+	int exercise = 0;
+
+}
