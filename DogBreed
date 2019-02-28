@@ -1,17 +1,20 @@
 public class DogBreed {
 	// instance variables;
-	int newOwn = 0;
-	int friendly = 0;
-	int groom = 0;
-	int health = 0;
-	int size = 0;
-	int train = 0;
-	int bark = 0;
+	private String breed = "";
+	private double newOwn = 0;
+	private double friendly = 0;
+	private double groom = 0;
+	private double health = 0;
+	private double size = 0;
+	private double train = 0;
+	private double bark = 0;
+	private double exercise = 0;
 	
 	
 	// constructor with all variables in order to pair dog with potenital candidates
 	
-	public DogBreed(int t, int n, int f, int g, int h, int s, int b){
+	public DogBreed(String br, double n, double f, double g, double h, double s, double t, double b, double e){
+	this.breed = br;
 	this.train = t;
 	this.newOwn = n;
 	this.freindly = f;
@@ -19,11 +22,21 @@ public class DogBreed {
 	this.health = h;
 	this.size = s;
 	this.bark = b;
+	this.exercise = e;
 	}
 	
 	// getter/setter method
+	
+	public String getBreed() {
+		return breed;
+	}
+	
+	public void setBreed(String breedType) {
+		breed = breedType;
+	}
+	
 	public int getTrain(){
-	   return apt;   
+	   return train;   
 	}
 	public void setTrain(int train1){
 	   train = train1;
@@ -31,8 +44,8 @@ public class DogBreed {
 	public int getFriendly(){
 	   return apt;   
 	}
-	public void setFriendly(int freindly1){
-	   freindly = friendly1;
+	public void setFriendly(int friendly1){
+	   friendly = friendly1;
 	}
 	public int getNewOwn(){
 	   return newOwn;   
@@ -65,10 +78,20 @@ public class DogBreed {
 	  bark = bark1;
 	}
 	
-	//main fucntion
-	
-	public static void main(String[] args){
-	       DogBreed d = new DogBreed(t1,n1,f1,g1,h1,s1,b1);
+	public double getExercise() {
+		return exercise;
 	}
+	
+	public void setExercise(double exercise1) {
+		exercise = exercise1;
+	}
+	
+	public String toString() {
+		return "Dog breed: " + breed + ", New Owner: " + newOwn + ", Friendly: " + friendly + ", Groom: " + groom
+			+ ", Health: " + health + ", Size: " + size + ", Train: " + train + ", Bark: " + bark + ", Exercise: "
+			+ exercise;
+	}
+	
+	//main function
 		
 }
