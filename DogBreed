@@ -13,5 +13,68 @@ public class DogBreed {
 	int train = 0;
 	int bark = 0;
 	int exercise = 0;
-
+	
+	
+	// constructor with all variables in order to pair dog with potenital candidates
+	
+	public DogBreed(int t, int n, int f, int g, int h, int s, int b){
+	this.train = t;
+	this.newOwn = n;
+	this.freindly = f;
+	this.groom = g;
+	this.health = h;
+	this.size = s;
+	this.bark = b;
+	}
+	
+	// getter/setter method
+	public int getTrain(){
+	   return apt;   
+	}
+	public void setTrain(int train1){
+	   train = train1;
+	}
+	public int getFriendly(){
+	   return apt;   
+	}
+	public void setFriendly(int freindly1){
+	   freindly = friendly1;
+	}
+	public int getNewOwn(){
+	   return newOwn;   
+	}
+	public void setNewOwn(int newOwn1){
+	   newOwn = newOwn1;
+	}
+	public int getGroom(){
+	   return groom;   
+	}
+	public void setGroom(int groom1){
+	   groom = groom1;
+	}
+	public int getHealth(){
+	   return health;   
+	}
+	public void setHealth(int health1){
+	   health = health1;
+	}
+	public int getSize(){
+	   return size;   
+	}
+	public void setSize(int size1){
+	   size = size1;
+	}
+	public int getBark(){
+	   return bark;   
+	}
+	public void setBark(int bark1){
+	  bark = bark1;
+	}
+	
+	//main fucntion
+	
+	public static void main(String[] args){
+	       DogBreed d = new DogBreed(t1,n1,f1,g1,h1,s1,b1);
+	}
+		
 }
