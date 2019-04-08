@@ -1,4 +1,5 @@
 public class DogBreed {
+
 	// instance variables;
 	private String breed = "";
 	private double newOwn = 0;
@@ -9,23 +10,32 @@ public class DogBreed {
 	private double train = 0;
 	private double bark = 0;
 	private double exercise = 0;
+	private String imgName; 
+	// default constructor
+	public DogBreed() {
+	}
 	
+	// constructor with all variables in order to pair dog with potential candidates
 	
-	// constructor with all variables in order to pair dog with potenital candidates
-	
-	public DogBreed(String br, double n, double f, double g, double h, double s, double t, double b, double e){
-	this.breed = br;
-	this.train = t;
-	this.newOwn = n;
-	this.freindly = f;
-	this.groom = g;
-	this.health = h;
-	this.size = s;
-	this.bark = b;
-	this.exercise = e;
+	public DogBreed(String breed, double newOwn, double friendly, double groom, double health, double size, double train, double bark,
+			double exercise, String img) {
+		this.breed = breed;
+		this.newOwn = newOwn;
+		this.friendly = friendly;
+		this.groom = groom;
+		this.health = health;
+		this.size = size;
+		this.train = train;
+		this.bark = bark;
+		this.exercise = exercise;
+		this.imgName = img;
 	}
 	
 	// getter/setter method
+
+	public String getImage() {
+		return imgName;
+	}
 	
 	public String getBreed() {
 		return breed;
@@ -35,46 +45,47 @@ public class DogBreed {
 		breed = breedType;
 	}
 	
-	public int getTrain(){
+	public double getTrain(){
 	   return train;   
 	}
-	public void setTrain(int train1){
+	
+	public void setTrain(double train1){
 	   train = train1;
 	}
-	public int getFriendly(){
-	   return apt;   
+	public double getFriendly(){
+	   return friendly;   
 	}
-	public void setFriendly(int friendly1){
+	public void setFriendly(double friendly1){
 	   friendly = friendly1;
 	}
-	public int getNewOwn(){
+	public double getNewOwn(){
 	   return newOwn;   
 	}
-	public void setNewOwn(int newOwn1){
+	public void setNewOwn(double newOwn1){
 	   newOwn = newOwn1;
 	}
-	public int getGroom(){
+	public double getGroom(){
 	   return groom;   
 	}
-	public void setGroom(int groom1){
+	public void setGroom(double groom1){
 	   groom = groom1;
 	}
-	public int getHealth(){
+	public double getHealth(){
 	   return health;   
 	}
-	public void setHealth(int health1){
+	public void setHealth(double health1){
 	   health = health1;
 	}
-	public int getSize(){
+	public double getSize(){
 	   return size;   
 	}
-	public void setSize(int size1){
+	public void setSize(double size1){
 	   size = size1;
 	}
-	public int getBark(){
+	public double getBark(){
 	   return bark;   
 	}
-	public void setBark(int bark1){
+	public void setBark(double bark1){
 	  bark = bark1;
 	}
 	
@@ -85,12 +96,42 @@ public class DogBreed {
 	public void setExercise(double exercise1) {
 		exercise = exercise1;
 	}
+
 	
 	public String toString() {
 		return "Dog breed: " + breed + ", New Owner: " + newOwn + ", Friendly: " + friendly + ", Groom: " + groom
-			+ ", Health: " + health + ", Size: " + size + ", Train: " + train + ", Bark: " + bark + ", Exercise: "
-			+ exercise;
+				+ ", Health: " + health + ", Size: " + size + ", Train: " + train + ", Bark: " + bark + ", Exercise: "
+				+ exercise;
 	}
+	
+	public static String dognames(){
+		String names = " Akita, Australian Shepherd, Beagle";
+		return names;
+	}
+	public static String dognames1(){
+		String names =" Bernese Mountain Dog, Border Collie" ;
+		return names;
+	}
+	public static String dognames2(){
+		String names = " Boston Terrier, Boxer, Bulldog" ;
+		return names;
+	}
+	public static String dognames3(){
+		String names = " Chihuahua & Chow Chow";
+		return names;
+	}
+	public static String dognames4(){
+		String names = " The following are the possible candidates";
+		return names;
+	}
+	public static String dognames5(){
+		String names = "you may match with once finishing the survery.";
+		return names;
+	}
+	public static String dognames6(){
+		String names = " Take the survey to find the best match for you!";
+		return names;
+	}
+	
 		
 }
-
