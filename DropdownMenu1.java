@@ -1,22 +1,22 @@
 import javafx.event.ActionEvent;
-	import javafx.event.EventHandler;
-	import javafx.geometry.Pos;
-	import javafx.scene.text.Font;
-	import javafx.scene.text.Text;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
 import javafx.application.Application;
-	import javafx.beans.value.ChangeListener;
-	import javafx.beans.value.ObservableValue;
-	import javafx.scene.Scene;
-	import javafx.stage.Stage;
-	import javafx.scene.layout.*;
-	import javafx.scene.paint.Color;
-	import javafx.scene.shape.Rectangle;
-	import javafx.scene.control.*;
-	import javafx.scene.image.Image;
-	import javafx.scene.image.ImageView;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 	public class DropdownMenu1 extends Application {
 		
@@ -40,7 +40,7 @@ import javafx.application.Application;
 			// Creating the first(Q) page
 			VBox root = new VBox();
 			TextField nameField = new TextField();
-			VBox page1Box = new VBox(10);
+			VBox page1Box = new VBox(20);
 
 			// FIRST PAGE
 			Pane gRoot = new Pane();
@@ -130,10 +130,91 @@ import javafx.application.Application;
 				}
 				}
 			});
-
+			
+			
 			Button nextPgBtn = new Button("Continue to next page");
-
+			
+			Button viewdogs = new Button("View Possible Dogs");
+			viewdogs.setFont(Font.font("Trajan", 25));
+			viewdogs.setLayoutX(220);
+			viewdogs.setLayoutY(0);
+			
+			//dogs page
+			Pane dogs = new Pane();
+			Scene dogs1 = new Scene(dogs, 450, 700);
+			viewdogs.setOnAction(e -> primaryStage.setScene(dogs1));
+			
+			Rectangle whiteRectangle1 = new Rectangle(450,200);
+			whiteRectangle1.setFill(Color.WHITE);
+			
+			Rectangle orangeRectangle1 = new Rectangle(450,500);
+			orangeRectangle1.setLayoutX(0);
+			orangeRectangle1.setLayoutY(200);
+			orangeRectangle1.setFill(Color.ORANGE);
+			
+			Label dogs2 = new Label(DogBreed.dognames());
+			dogs2.setLayoutX(0);
+			dogs2.setLayoutY(200);
+			dogs2.setTextFill( Color.BLACK );
+			dogs2.setFont(Font.font ("Trajan", 25));
+			
+			Label dogs3 = new Label(DogBreed.dognames1());
+			dogs3.setLayoutX(0);
+			dogs3.setLayoutY(250);
+			dogs3.setTextFill( Color.BLACK );
+			dogs3.setFont(Font.font ("Trajan", 25));
+			
+			Label dogs4 = new Label(DogBreed.dognames2());
+			dogs4.setLayoutX(0);
+			dogs4.setLayoutY(300);
+			dogs4.setTextFill( Color.BLACK );
+			dogs4.setFont(Font.font ("Trajan", 25));
+			
+			Label dogs5 = new Label(DogBreed.dognames3());
+			dogs5.setLayoutX(0);
+			dogs5.setLayoutY(350);
+			dogs5.setTextFill( Color.BLACK );
+			dogs5.setFont(Font.font ("Trajan", 25));
+			
+			Label dogs6 = new Label(DogBreed.dognames4());
+			dogs6.setLayoutX(0);
+			dogs6.setLayoutY(0);
+			dogs6.setTextFill( Color.BLACK );
+			dogs6.setFont(Font.font ("Trajan", 20));
+			
+			Label dogs7 = new Label(DogBreed.dognames5());
+			dogs7.setLayoutX(7);
+			dogs7.setLayoutY(50);
+			dogs7.setTextFill( Color.BLACK );
+			dogs7.setFont(Font.font ("Trajan", 20));
+			
+			Label dogs8 = new Label(DogBreed.dognames6());
+			dogs8.setLayoutX(0);
+			dogs8.setLayoutY(100);
+			dogs8.setTextFill( Color.BLACK );
+			dogs8.setFont(Font.font ("Trajan", 20));
+			
+			Button backB = new Button("Previous Page");
+			backB.setFont(Font.font("Verdana", 15));
+			backB.setLayoutX(0);
+			backB.setLayoutY(670);
+			backB.setOnAction(f -> primaryStage.setScene(firstScene));
+			
+			
+			//creating dogs page
+			dogs.getChildren().add(whiteRectangle1);
+			dogs.getChildren().add(orangeRectangle1);
+			dogs.getChildren().add(dogs2);
+			dogs.getChildren().add(dogs3);
+			dogs.getChildren().add(dogs4);
+			dogs.getChildren().add(dogs5);
+			dogs.getChildren().add(dogs6);
+			dogs.getChildren().add(dogs7);
+			dogs.getChildren().add(dogs8);
+			dogs.getChildren().add(backB);
+			
 			// Creating the second page
+			page1Box.getChildren().add(viewdogs);
 			page1Box.getChildren().add(profileName);
 			page1Box.getChildren().add(nameField);
 			page1Box.getChildren().add(ownerQ);
@@ -318,32 +399,6 @@ import javafx.application.Application;
 			root2.getChildren().add(finished);
 			root2.setSpacing(15);
 			root2.setAlignment(Pos.CENTER);
-
-			
-			//FIFTH PAGE
-			Pane root3 = new Pane();
-			Rectangle r5 = new Rectangle(450, 200);
-			r5.setFill(Color.WHITE);
-			root3.getChildren().add(r5);
-
-			Rectangle r6 = new Rectangle(450, 500);
-			r6.setLayoutX(0);
-			r6.setLayoutY(200);
-			r6.setFill(Color.ORANGE);
-			root3.getChildren().add(r6);
-			
-			
-			Button perfectButton = new Button("Find Perfect Match!");
-			perfectButton.setFont(Font.font("Verdana", 30));
-			perfectButton.setLayoutX(70);
-			perfectButton.setLayoutY(480);
-			root3.getChildren().add(perfectButton);
-			
-			Button threeBestMatchButton = new Button("Find 3 Best Matches!");
-			threeBestMatchButton.setFont(Font.font("Verdana", 28));
-			threeBestMatchButton.setLayoutX(70);
-			threeBestMatchButton.setLayoutY(300);
-			root3.getChildren().add(threeBestMatchButton);
 			
 			
 			finished.setOnAction(new EventHandler<ActionEvent>() {
@@ -373,14 +428,46 @@ import javafx.application.Application;
 						e1.printStackTrace();	
 					}
 					
-					Pane finalRoot = new Pane();
-					Pane finalRoot1 = new Pane();
+					Pane root3 = new Pane();
+			
+			        Rectangle r5 = new Rectangle(450, 200);
+					r5.setFill(Color.WHITE);
+			
+					Rectangle r6 = new Rectangle(450, 500);
+					r6.setLayoutX(0);
+					r6.setLayoutY(200);
+					r6.setFill(Color.ORANGE);
+			
+					Button reButton = new Button("Restart Survey");
+					reButton.setFont(Font.font("Verdana", 15));
+					reButton.setLayoutX(0);
+					reButton.setLayoutY(670);
+					reButton.setOnAction(f -> primaryStage.setScene(scene1));
+			
+					Button perfectButton = new Button("Find Perfect Match!");
+					perfectButton.setFont(Font.font("Verdana", 30));
+					perfectButton.setLayoutX(70);
+					perfectButton.setLayoutY(480);
+		
+					Button threeBestMatchButton = new Button("Find 3 Best Matches!");
+					threeBestMatchButton.setFont(Font.font("Verdana", 28));
+					threeBestMatchButton.setLayoutX(70);
+					threeBestMatchButton.setLayoutY(300);
+					
+					root3.getChildren().add(r5);
+					root3.getChildren().add(r6);
+					root3.getChildren().add(reButton);
+					root3.getChildren().add(perfectButton);
+					root3.getChildren().add(threeBestMatchButton);
 					
 					Scene scene3 = new Scene(root3, 450, 700);
-					primaryStage.setScene(scene3);
-					primaryStage.setTitle("Dog Finder");
-					primaryStage.show();
+			        primaryStage.setScene(scene3);
+			        primaryStage.setTitle("Dog Finder");
+			        primaryStage.show();
 					
+					Pane finalRoot = new Pane();
+					Pane finalRoot1 = new Pane();
+			
 					//Going to perfect match page
 					Scene scene4 = new Scene(finalRoot, 450, 700);
 					perfectButton.setOnAction(f -> primaryStage.setScene(scene4));
@@ -416,6 +503,13 @@ import javafx.application.Application;
 					perfectDog.setLayoutY(520);
 					perfectDog.setTextFill(Color.BLACK);
 					perfectDog.setFont(Font.font ("Impact", 35));
+					
+					// Back button and handler for best match page
+					Button backb = new Button("Previous Page");
+			        backb.setFont(Font.font("Verdana", 15));
+			        backb.setLayoutX(0);
+			        backb.setLayoutY(670);
+					backb.setOnAction(f -> primaryStage.setScene(scene3));
 
 					System.out.println("###: " + bdog1 + bdog2);
 					
@@ -433,6 +527,7 @@ import javafx.application.Application;
 					finalRoot.getChildren().add(labelPerfect2);
 					finalRoot.getChildren().add(perfectDog);
 					finalRoot.getChildren().add(bestDogImageView);
+					finalRoot.getChildren().add(backb);
 					
 					// 3 BEST MATCHES PAGE
 					Rectangle whiteRectangle2 = new Rectangle(450,200);
@@ -472,7 +567,14 @@ import javafx.application.Application;
 					bestDog3.setLayoutY(620);
 					bestDog3.setTextFill(Color.BLACK);
 					bestDog3.setFont(Font.font ("Impact", 30));
-
+					
+					// Back button and handler for 3 best matches page
+					Button backb1 = new Button("Previous Page");
+			        backb1.setFont(Font.font("Verdana", 15));
+			        backb1.setLayoutX(0);
+			        backb1.setLayoutY(670);
+					backb1.setOnAction(f -> primaryStage.setScene(scene3));
+			        
 					System.out.println("###: " + bdog1 + bdogimage1);
 					
 					Image bestDogImage1 = new Image(bdogimage1);
@@ -507,6 +609,7 @@ import javafx.application.Application;
 					finalRoot1.getChildren().add(bestDog3);
 					finalRoot1.getChildren().add(bestDogImageView2);
 					finalRoot1.getChildren().add(bestDogImageView3);
+					finalRoot1.getChildren().add(backb1);
 					
 					
 				}
