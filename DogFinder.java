@@ -1,279 +1,117 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
-public class DogFinder {
-	public ArrayList<DogBreed> dogs = new ArrayList<DogBreed>();
-	//private ArrayList<Human> humans = new ArrayList<Human>();
-	public Scanner keyboard = new Scanner(System.in);
-	public ArrayList<Match> listOfScores = new ArrayList<Match>();
-	public Human humanToCompare;
-	public String theBestDogBreed;
-	public String theBestDogBreedImage;
+import javafx.stage.Stage;
+/***
+ * DogFinder runs the application and creates the necessary windows. It also sets actions to the 
+ * buttons on all the windows. 
+ * @author Team-9
+ *
+ */
+public class DogFinder extends Application {
+	// variable to hold the current stage
+	Stage currentStage;
 	
-	public DogFinder(Human aHuman) throws IOException {
-		humanToCompare = aHuman;
-		loadDogs();
-		//loadDogs();
-		//humanProfile();
-		//compareHumanToDogs(humanToCompare);
-		//System.out.println("Awesome " + humans.get(0).getName()
-		//		+ "! It looks like your best match is a(n) " + compareScores() + "!");
-	}
+	// human object
+	Human currentHuman = new Human();
 	
+	// new set of lists
+	Lists currentLists = new Lists();
 	
-	public void humanProfile() {
-		Human human1 = new Human();
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		currentStage = primaryStage;
+		 
+		// load all lists
+		currentLists.loadDogs("DogDataset.txt");
+		currentLists.loadDogNames();
+		currentLists.loadQuestions("Questions.txt");
 		
-		System.out.print("What is your name? ");
-		String profileName = keyboard.nextLine();
-		human1.setName(profileName);
+		// create the first page
+		BeginPage page1 = new BeginPage();
+		Pane page1Root = page1.getPage1Root();
+		Button pg1BtnToPg2 = page1.getButtonPage1();
+		page1Root.getChildren().add(pg1BtnToPg2);
+		Scene page1Scene = new Scene(page1Root, 450, 700);
+		
+		// create the second page
+		SecondPage page2 = new SecondPage();
+		VBox page2Root = page2.getPage2Root(currentHuman);
+		Button pg2BtnToPg3 = page2.getPg2ContinueBtn();
+		Button pg2BtnToDogsPg = page2.getPg2DogsBtn();
+		page2Root.getChildren().addAll(pg2BtnToPg3, pg2BtnToDogsPg);
+		Scene page2Scene = new Scene(page2Root, 450, 700);
+		
+		// create the third page
+		ThirdPage page3 = new ThirdPage(currentHuman);
+		VBox page3Root = page3.getPage3Root();
+		Button pg3BtnToPg4 = page3.getPage3Button();
+		page3Root.getChildren().add(pg3BtnToPg4);
+		Scene page3Scene = new Scene(page3Root, 450, 700);
+		
+		// create the possible dogs page
+		PossibleDogsPage pdPage = new PossibleDogsPage(currentLists);
+		Pane pdPageRoot = pdPage.getPossibleDogsRoot();
+		Button pdPgPrevBtn = pdPage.getPreviousBtn();
+		pdPageRoot.getChildren().add(pdPgPrevBtn);
+		Scene pdScene = new Scene (pdPageRoot, 450, 700);
+		
+		// create the fourth page
+		FourthPage page4 = new FourthPage(currentHuman);
+		VBox page4Root = page4.getPage4Root();
+		Button pg4BtnToPg5 = page4.getPage4Button();
+		page4Root.getChildren().add(pg4BtnToPg5);
+		Scene page4Scene = new Scene(page4Root, 450, 700);
+		
+		// create the fifth page
+		FifthPage page5 = new FifthPage();
+		Pane page5Root = page5.getPage5Root();
+		Button restartSurveyBtn = page5.getRestartSurveyBtn();
+		Button pg5ToBestMatchPg = page5.getPerfectMatchBtn();
+		Button pg5ToTop3MatchesPg = page5.getTop3MatchesButton();
+		page5Root.getChildren().addAll(restartSurveyBtn, pg5ToBestMatchPg, pg5ToTop3MatchesPg);
+		Scene page5Scene = new Scene(page5Root, 450, 700);
 		
 		
-		System.out.print("Have you ever owned a dog? Enter Y or N: ");
-		char newOwner = keyboard.nextLine().charAt(0);
-		if (newOwner == 'Y') {
-			human1.setNewOwn(1);
-		} else if (newOwner == 'N') {
-			human1.setNewOwn(0);
-		}
-		
-		System.out.println("The following questions require your answer on a scale of 1 to 5. "
-				+ "\n 1 - strongly disagree. \n 2 - disagree \n 3 - neither disagree or agree"
-				+ "\n 4 - agree \n 5 - strongly agree");
-		System.out.println("Please enter a value of 1-5 for each question.");
-		System.out.println("Please answer honestly so we can find the right match for you!");
-		
-		System.out.print("I like to socialize: ");
-		double social = keyboard.nextDouble();
-		human1.setFriendly(social);
+		// create bestMatchPage
+		PerfectMatchPage perfectMatchPg = new PerfectMatchPage();
+		Pane perfectMatchPgRoot = perfectMatchPg.getBestMatchPageRoot(currentHuman, currentLists);
+		Button goBackToPg5 = perfectMatchPg.getBackBtnOnBestMatchPg();
+		perfectMatchPgRoot.getChildren().add(goBackToPg5);
+		Scene perfectMatchPgScene = new Scene(perfectMatchPgRoot, 450, 700);
 		
 		
-		System.out.print("I don't mind cleaning a lot: ");
-		double clean = keyboard.nextDouble();
-		human1.setGroom(clean);
+		// create top3matches page
+		Top3MatchesPage top3MatchPg = new Top3MatchesPage();
+		Pane top3MatchPgRoot = top3MatchPg.getTop3MatchesPage(currentHuman, currentLists);
+		Button top3PgBackBtn = top3MatchPg.getBackBtnTop3Pg();
+		top3MatchPgRoot.getChildren().add(top3PgBackBtn);
+		Scene top3MatchesPgScene = new Scene(top3MatchPgRoot, 450, 700);
 		
-		System.out.print("I would be okay if my dog's breed had a history of health problems as"
-				+ "long as the dog is right for me: ");
-		double health = keyboard.nextDouble();
-		human1.setHealth(health);
+		// set actions to all buttons to redirect to correct scenes 
+		pg1BtnToPg2.setOnAction(a -> currentStage.setScene(page2Scene));
+		pg2BtnToPg3.setOnAction(b -> currentStage.setScene(page3Scene));
+		pg2BtnToDogsPg.setOnAction(c -> currentStage.setScene(pdScene));
+		pdPgPrevBtn.setOnAction(d -> currentStage.setScene(page2Scene));
+		pg3BtnToPg4.setOnAction(e -> currentStage.setScene(page4Scene));
+		pg4BtnToPg5.setOnAction(f -> currentStage.setScene(page5Scene));
+		restartSurveyBtn.setOnAction(g -> currentStage.setScene(page2Scene));
+		pg5ToBestMatchPg.setOnAction(z ->currentStage.setScene(perfectMatchPgScene));
+		pg5ToTop3MatchesPg.setOnAction(i -> currentStage.setScene(top3MatchesPgScene));
+		goBackToPg5.setOnAction(j -> currentStage.setScene(page5Scene));
+		top3PgBackBtn.setOnAction(k -> currentStage.setScene(page5Scene));
 		
-		System.out.print("I would put a lot of time into training my dog: ");
-		double training = keyboard.nextDouble();
-		human1.setTrain(training);
-		
-		
-		System.out.print("I do not mind if my dog barks: ");
-		double bark = keyboard.nextDouble();
-		human1.setBark(bark);
-		
-		System.out.print("I would put a lot of time into exercising my dog: ");
-		double exercise = keyboard.nextDouble();
-		human1.setExercise(exercise);
-		
-		System.out.print("For this question, please enter: \n 1 if you prefer small dogs "
-				+ "\n 3 if you prefer medium dogs \n 5 if you prefer large dogs \n");
-		double size = keyboard.nextDouble();
-		human1.setSize(size);
-		
-		//humans.add(human1);
-		
-		System.out.println("Thanks for answering! Finding the best match for you!");
-		
-	}
-	
-	public void compareHumanToDogs(Human humanProfile) {
-		humanToCompare = humanProfile;
-		
-		for (DogBreed dog : dogs) {
-			double matchScore = 0.0;
-			double score = 0.0;
-			score = Math.abs(humanToCompare.getNewOwn() - dog.getNewOwn());
-			matchScore = matchScore + score;
-			
-			score = Math.abs(humanToCompare.getFriendly() - dog.getFriendly());	
-			matchScore = matchScore + score;
-			
-			score = Math.abs(humanToCompare.getGroom() - dog.getGroom());
-			matchScore = matchScore + score;
-			
-			score = Math.abs(humanToCompare.getHealth() - dog.getHealth());
-			matchScore = matchScore + score;
-			
-			score = Math.abs(humanToCompare.getTrain() - dog.getTrain());
-			matchScore = matchScore + score;
-			
-			score = Math.abs(humanToCompare.getBark() - dog.getBark());
-			matchScore = matchScore + score;
-			
-			score = Math.abs(humanToCompare.getExercise() - dog.getExercise());
-			matchScore = matchScore + score;
-			
-			if (humanToCompare.getSize() != dog.getSize()) {
-				matchScore = matchScore + 1;
-			}
-			
-			Match newMatchScore = new Match(dog.getBreed(), matchScore, dog.getImage());
-			System.out.println("Printing out matchscores: " + newMatchScore.getDogBreed() + newMatchScore.getMatchScore()
-								+ newMatchScore.getMatchedImage());
-			
-			listOfScores.add(newMatchScore);
-			
-		}
-		
-	}
-
-	// gets best dog name as a string
-	public String compareScores() {
-		double bestMatchScore = 26.0;	
-		String bestDog = "";
-		for (Match i: listOfScores) {
-			if (i.getMatchScore() < bestMatchScore) {
-				bestMatchScore = i.getMatchScore();
-				bestDog = i.getDogBreed();
-				System.out.println("Best Match Score:" + bestMatchScore + "Best Dog:" + bestDog);
-			}
-		}
-		
-		return bestDog;
+		// start the program with first scene
+		currentStage.setTitle("Dog Finder");
+		currentStage.setScene(page1Scene);
+		currentStage.show();
 	}
 	
-
-	// gets best dog image (also returned as string)
-	public String getImage() {
-		double bestMatchScore = 26.0;
-		String bestDogImage = "";
-		for (Match i: listOfScores) {
-			if (i.getMatchScore() < bestMatchScore) {
-				bestMatchScore = i.getMatchScore();
-				bestDogImage = i.getMatchedImage();
-			}
-		}
-		return bestDogImage;
+	// launch the program
+	public static void main(String[] args) throws Exception {
+		launch(args);
 	}
-	
-	// gets 2ND best dog name as a string
-	public String compareScores2() {
-		double bestMatchScore = 26.0;	
-		double secondBest = 26.0;
-		String bestDog = "";
-		String bestDog2 = "";
-		for (Match i: listOfScores) {
-			if (i.getMatchScore() < bestMatchScore) {
-				bestMatchScore = i.getMatchScore();
-				bestDog = i.getDogBreed();
-				System.out.println("Best Match Score:" + bestMatchScore + "Best Dog:" + bestDog);
-			}
-			if (i.getMatchScore() < secondBest && i.getMatchScore() > bestMatchScore) {
-				secondBest = i.getMatchScore();
-				bestDog2 = i.getDogBreed();
-			}
-		}
-		
-		return bestDog2;
-	}
-
-	// gets SECOND best dog IMAGE (also returned as string)
-	public String getImage2() {
-		double bestMatchScore = 26.0;
-		double secondBest = 26.0;
-		String bestDogImage2 = "";
-		for (Match i: listOfScores) {
-			if (i.getMatchScore() < bestMatchScore) {
-				bestMatchScore = i.getMatchScore();
-			}
-			if (i.getMatchScore() < secondBest && i.getMatchScore() > bestMatchScore) {
-				secondBest = i.getMatchScore();
-				bestDogImage2 = i.getMatchedImage();
-			}
-		}
-		
-		return bestDogImage2;
-	}
-
-	// gets 3RD best dog name as a string
-	public String compareScores3() {
-		double bestMatchScore = 26.0;	
-		double secondBest = 26.0;
-		double thirdBest = 26.0;
-		String bestDog3 = "";
-
-		for (Match i: listOfScores) {
-			if (i.getMatchScore() < bestMatchScore) {
-				bestMatchScore = i.getMatchScore();
-			}
-			if (i.getMatchScore() < secondBest && i.getMatchScore() > bestMatchScore) {
-				secondBest = i.getMatchScore();
-				
-			}
-			if (i.getMatchScore() < thirdBest && i.getMatchScore() > secondBest){
-				thirdBest = i.getMatchScore();
-				bestDog3 = i.getDogBreed();
-			}
-		}
-		
-		return bestDog3;
-	}
-
-	// gets THIRD best dog IMAGE (also returned as string)
-	public String getImage3() {
-		double bestMatchScore = 26.0;
-		double secondBest = 26.0;
-		double thirdBest = 26.0;
-
-		String bestDogImage3 = "";
-
-		for (Match i: listOfScores) {
-			if (i.getMatchScore() < bestMatchScore) {
-				bestMatchScore = i.getMatchScore();
-			}
-			if (i.getMatchScore() < secondBest && i.getMatchScore() > bestMatchScore) {
-				secondBest = i.getMatchScore();
-				
-			}
-			if (i.getMatchScore() < thirdBest && i.getMatchScore() > secondBest){
-				thirdBest = i.getMatchScore();
-				bestDogImage3 = i.getMatchedImage();
-			}
-		}
-		
-		return bestDogImage3;
-	}
-
-
-	public void loadDogs() throws IOException {
-
-		BufferedReader fileReader = new BufferedReader(new FileReader("DogDataset.txt"));
-		String line = fileReader.readLine();
-		while (line != null) {
-
-			String[] fields = line.split(",");
-
-			dogs.add(new DogBreed(fields[0], Double.parseDouble(fields[1]), Double.parseDouble(fields[2]),
-					Double.parseDouble(fields[3]), Double.parseDouble(fields[4]), Double.parseDouble(fields[5]),
-					Double.parseDouble(fields[6]), Double.parseDouble(fields[7]), Double.parseDouble(fields[8]), fields[9]));
-
-			line = fileReader.readLine();
-
-		}
-		fileReader.close();
-	}
-
-	public void printDogs() {
-
-		for (DogBreed i : dogs) {
-			System.out.println(i);
-			System.out.println(i.getBreed());
-		}
-		System.out.println("");
-	}
-//	
-//	private void printHumans() {
-//
-//		for (Human i : humans) {
-//			System.out.println(i);
-//		}
-//	}
 }

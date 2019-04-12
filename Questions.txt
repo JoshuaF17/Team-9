@@ -1,0 +1,10 @@
+What is your name?
+Have you ever owned a dog before?
+The following questions require your answer on a scale of 1 to 5.\n 5 - STRONGLY Agree\n 4 - Agree\n 3 - Neither agree or disagree\n 2 - Disagree\n 1 - STRONGLY Disagree
+I like to socialize
+I don't mind cleaning a lot
+I would be okay if my dog's breed had a history of health\n problems as long as the dog is right for me
+I would put a lot of time into training my dog
+I do not mind if my dog barks
+I would put a lot of time into exercising my dog
+Select which size of dog you prefer

@@ -1,6 +1,1 @@
 Akita,1,2.25,3,4,5,2.5,5,4,akita.jpgAustralian Shepherd,1,4.25,2,2,5,5,4,5,AustShepherd.jpgBeagle,0,5,3.5,1,1,2.5,5,4,Beagle.jpgBernese Mountain Dog,1,4.25,4,1,5,4,4,4,BerneseMountain.jpgBorder Collie,0,4.25,3,2,3,5,2,5,BorderCollies.jpgBoston Terrier,1,4.5,3.5,4,1,4,3,4,Boston_Terrier.jpgBoxer,1,4,4.5,2,3,4,3,5,boxer.jpgBulldog,1,4,4,4,1,2.5,4,3,bulldog.jpgChihuahua,1,3.5,3.5,2,1,4,3,3,Chihuaha.jpgChow Chow,0,1.25,1,2,5,1.5,1,2,chowchow.jpg
-Daschund,4,3.25,1,2,1,3,3,5,3.5 Daschund.jpg
-Doberman,3,3,5,1,5,1,5,5,1,4, Doberman.jpg
-English Cocker Spaniel,4,5,3,4,1,4.5,4,5, EnglishSpaniel.jpg
-German Shepherd,2,4,5,4,5,5,4,5, GermanShepherd.jpg
-Golden Retriever,3,5,2,2,3,5,5,5, Golden.jpg
